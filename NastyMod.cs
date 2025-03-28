@@ -22,6 +22,8 @@ using Il2CppScheduleOne.Employees;
 
 using JetBrains.Annotations;
 using Il2CppScheduleOne.NPCs;
+using Il2CppScheduleOne.Economy;
+using Il2CppScheduleOne.Property;
 
 public class NastyModClass : MelonMod
 {
@@ -33,7 +35,7 @@ public class NastyModClass : MelonMod
     private int buttonHeight = 30;
     private int buttonSpacing = 10;
 
-    private int menuWidth = 650;
+    private int menuWidth = 800;
     private int menuHeight = 500;
     private int menuSpacing = 15;
 
@@ -41,10 +43,12 @@ public class NastyModClass : MelonMod
     private int tabHeight = 0;
 
     private int menuTab = 0;
-    private readonly List<string> menuTabs = new List<string> { "Player", "World", "Spawner", "Misc", "Employees", "Credits" };
+    private readonly List<string> menuTabs = new List<string> { "Player", "World", "Spawner", "Misc", "Employees", "Teleport", "Credits" };
 
     private Dictionary<string, List<string>> itemTree;
     private List<string> propertys;
+    private List<string> businesses;
+    private List<string> custom;
 
     private int _moddedStackSize = 100;
     private int _moddedCash = 1000;
@@ -56,17 +60,24 @@ public class NastyModClass : MelonMod
     private bool _infiniteEnergy = false;
     private bool _infiniteStamina = false;
     private bool _neverWanted = false;
-    private bool _ESP = false;
     private float _moveSpeedMultiplier = 1f;
     private float _crouchSpeedMultiplier = 0.6f;
     private float _jumpMultiplier = 1f;
 
+    private bool _ESP = false;
+    private float _ESP_Range = 25f;
+    private float _ESP_BoxWidth = 80f;
+    private float _ESP_BoxHeight = 100f;
+
     private string _selectedCategory = "Product";
     private Vector2 _itemSpawnerCategoryScrollPosition;
     private int _itemAmount = 1;
-
     private string _selectedProperty = "barn";
     private Vector2 _employeeSpawnerPropertyScrollPosition;
+
+    private Vector2 _teleportPropertyScrollPosition;
+    private Vector2 _teleportBusinessesScrollPosition;
+    private Vector2 _teleportCustomScrollPosition;
 
     private GUIStyle _titleStyle;
     private GUIStyle _headerStyle;
@@ -106,6 +117,8 @@ public class NastyModClass : MelonMod
 
         loadAllItems();
         loadAllPropertys();
+        loadAllBusinesses();
+        loadAllCustom();
     }
 
     private void loadAllItems()
@@ -122,6 +135,22 @@ public class NastyModClass : MelonMod
         propertys = propertyLoader.LoadPropertys();
 
         MelonLogger.Msg($"Loaded {propertys.Count} propertys");
+    }
+
+    private void loadAllBusinesses()
+    {
+        NastyMod.JsonLoader businessLoader = new NastyMod.JsonLoader();
+        businesses = businessLoader.LoadBusinesses();
+
+        MelonLogger.Msg($"Loaded {businesses.Count} businesses");
+    }
+
+    private void loadAllCustom()
+    {
+        NastyMod.JsonLoader customLoader = new NastyMod.JsonLoader();
+        custom = customLoader.LoadCustom();
+
+        MelonLogger.Msg($"Loaded {custom.Count} custom locations");
     }
 
     public override void OnUpdate()
@@ -152,28 +181,41 @@ public class NastyModClass : MelonMod
             _isOpen = !_isOpen;
     }
 
-    public override void OnGUI()
+    public void GUIFunctions()
     {
-        // **ESP** (Could be cleaned up and possibly distance sliders / box sliders. And not putting variables in loop but thats TODO)
+        // ** ESP
         if (_ESP)
         {
             foreach (NPC npcs in NPCManager.NPCRegistry)
             {
                 if (npcs.FirstName == String.Empty) continue;
+
+                // Implement distance slider
                 float dist = Vector3.Distance(Player.Local.transform.position, npcs.transform.position);
-                if (dist > 25f) continue; //Implement distance slider
+                if (dist > _ESP_Range) continue;
+
+                // Hides boxes for entities behind you.
                 Vector3 screenPosition = Camera.main.WorldToScreenPoint(npcs.transform.position);
-                if (screenPosition.z < 0) continue; //hides boxes for entities behind you.
+                if (screenPosition.z < 0) continue;
+
                 Vector2 start = new Vector2(Screen.width / 2, Screen.height);
                 Vector2 end = new Vector2(screenPosition.x, Screen.height - screenPosition.y);
-                float boxwidth = 100f * (dist / 100f);
+
+                float boxwidth = _ESP_BoxWidth * (dist / _ESP_BoxWidth);
                 if (boxwidth < 80) boxwidth = 80f;
-                float boxheight = 100f * (dist / 100f);
+
+                float boxheight = _ESP_BoxHeight * (dist / _ESP_BoxHeight);
                 if (boxheight < 100) boxheight = 100f;
-                GUI.Label(new Rect(end.x - (boxwidth / 2) - 20f, end.y - boxheight - 20f, boxwidth + 50f, boxheight + 50f), npcs.FirstName + " " + npcs.LastName);
+
+                GUI.Label(new Rect(end.x - (boxwidth / 2) - 20f, end.y - boxheight - 20f, boxwidth + 50f, boxheight + 50f), $"{npcs.FirstName} {npcs.LastName}");
                 DrawBox(new Vector2(end.x - (boxwidth / 2), end.y - boxheight), boxwidth, boxheight, Color.blue, 1f);
             }
         }
+    }
+
+    public override void OnGUI()
+    {
+        GUIFunctions();
 
         if (!_isOpen) return;
 
@@ -248,6 +290,9 @@ public class NastyModClass : MelonMod
                 RenderEmployeesTab();
                 break;
             case 5:
+                RenderTeleportTab();
+                break;
+            case 6:
                 RenderCreditsTab();
                 break;
         }
@@ -348,16 +393,23 @@ public class NastyModClass : MelonMod
         // Spacer
         GUILayout.Space(10);
 
-        // ** Coming soon...
         // ** Infinite Energy toggle
         GUILayout.BeginHorizontal();
-        GUILayout.Label("ESP (Box Based)");
+        GUILayout.Label("Box ESP");
         string status_ESP = _ESP ? "On" : "Off";
         if (GUILayout.Button(status_ESP, _buttonStyle))
         {
             _ESP = !_ESP;
             MelonLogger.Msg("ESP toggled!");
         }
+        GUILayout.EndHorizontal();
+
+        // Spacer
+
+        // ** ESP Range slider
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("ESP Range: " + _ESP_Range);
+        _ESP_Range = GUILayout.HorizontalSlider(_ESP_Range, 1f, 100f, GUILayout.Width(180), GUILayout.Height(10));
         GUILayout.EndHorizontal();
 
         GUILayout.EndArea();
@@ -649,28 +701,103 @@ public class NastyModClass : MelonMod
         GUILayout.EndArea();
     }
 
+    private void RenderTeleportTab()
+    {
+        GUILayout.BeginArea(new Rect(15, 15, menuWidth - (menuSpacing * 4), menuHeight - 110 - (menuSpacing * 2)));
+
+        // Tab Title
+        GUILayout.Label("Teleport", _headerStyle);
+
+        // Spacer
+        GUILayout.Space(10);
+
+        // ** Property Teleport buttons
+        GUILayout.BeginArea(new Rect(0, 40, (menuWidth - (menuSpacing * 4) - menuSpacing) / 2, menuHeight - 110 - (menuSpacing * 2) - 40));
+        GUILayout.Label("Propertys");
+        _teleportPropertyScrollPosition = GUILayout.BeginScrollView(_teleportPropertyScrollPosition, GUILayout.Width((menuWidth - (menuSpacing * 4) - menuSpacing) / 4), GUILayout.Height(menuHeight - 110 - (menuSpacing * 2) - 40));
+        foreach (var property in propertys)
+        {
+            if (GUILayout.Button(property))
+            {
+                Il2CppScheduleOne.Console.Teleport command = new Il2CppScheduleOne.Console.Teleport();
+                Il2CppSystem.Collections.Generic.List<string> args = new Il2CppSystem.Collections.Generic.List<string>();
+
+                args.Add(property);
+
+                command.Execute(args);
+            }
+        }
+        GUILayout.EndScrollView();
+        GUILayout.EndArea();
+
+        // ** Business Teleport buttons
+        GUILayout.BeginArea(new Rect(((menuWidth - (menuSpacing * 4) - menuSpacing) / 2) + menuSpacing, 40, (menuWidth - (menuSpacing * 4) - menuSpacing) / 2, menuHeight - 110 - (menuSpacing * 2) - 40));
+        GUILayout.Label("Businesses");
+        _teleportBusinessesScrollPosition = GUILayout.BeginScrollView(_teleportBusinessesScrollPosition, GUILayout.Width((menuWidth - (menuSpacing * 4) - menuSpacing) / 4), GUILayout.Height(menuHeight - 110 - (menuSpacing * 2) - 40));
+        foreach (var business in businesses)
+        {
+            if (GUILayout.Button(business))
+            {
+                Il2CppScheduleOne.Console.Teleport command = new Il2CppScheduleOne.Console.Teleport();
+                Il2CppSystem.Collections.Generic.List<string> args = new Il2CppSystem.Collections.Generic.List<string>();
+
+                args.Add(business);
+
+                command.Execute(args);
+            }
+        }
+        GUILayout.EndScrollView();
+        GUILayout.EndArea();
+
+        // ** Custom Teleport buttons
+        /* GUILayout.BeginArea(new Rect(((menuWidth - (menuSpacing * 4) - menuSpacing) / 4) * 2 + (menuSpacing * 2), 40, (menuWidth - (menuSpacing * 4) - menuSpacing) / 4, menuHeight - 110 - (menuSpacing * 2) - 40));
+        GUILayout.Label("Custom");
+        _teleportCustomScrollPosition = GUILayout.BeginScrollView(_teleportCustomScrollPosition, GUILayout.Width((menuWidth - (menuSpacing * 4) - menuSpacing) / 4), GUILayout.Height(menuHeight - 110 - (menuSpacing * 2) - 40));
+        foreach (var cst in custom)
+        {
+            if (GUILayout.Button(cst))
+            {
+                Il2CppScheduleOne.Console.Teleport command = new Il2CppScheduleOne.Console.Teleport();
+                Il2CppSystem.Collections.Generic.List<string> args = new Il2CppSystem.Collections.Generic.List<string>();
+
+                args.Add(cst);
+
+                command.Execute(args);
+            }
+        }
+        GUILayout.EndScrollView();
+        GUILayout.EndArea(); */
+
+        GUILayout.EndArea();
+    }
+
     private void RenderCreditsTab()
     {
         GUILayout.BeginArea(new Rect(15, 15, menuWidth - (menuSpacing * 4), menuHeight - 110 - (menuSpacing * 2)));
 
-        // **Tab Title**
+        // Tab Title
         GUILayout.Label("Credits", _headerStyle);
 
-        // **Spacer**
+        // Spacer
         GUILayout.Space(10);
 
-        // **Creator**
+        // ** Creator
         GUILayout.Label("This mod was created by nasty.codes");
         GUILayout.Label("Discord: nasty.codes");
 
-        // **Spacer**
+        // Spacer
+        GUILayout.Space(20);
+
+        // ** Contributors
+        GUILayout.Label("Jumpman - Box ESP feature");
+
+        // Spacer
         GUILayout.Space(20);
 
         // **Thanks**
         GUILayout.Label("Thanks to");
         GUILayout.Label("GitHub Copilot");
         GUILayout.Label("MelonLoader");
-        GUILayout.Label("Jumpman");
 
         GUILayout.EndArea();
     }

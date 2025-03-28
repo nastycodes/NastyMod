@@ -113,6 +113,8 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="Resources\items.json" />
     <EmbeddedResource Include="Resources\propertys.json" />
+    <EmbeddedResource Include="Resources\businesses.json" />
+    <EmbeddedResource Include="Resources\custom.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

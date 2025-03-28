@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Il2CppScheduleOne.Economy;
 using MelonLoader;
 
 namespace NastyMod
@@ -122,6 +123,86 @@ namespace NastyMod
                 }
             }
             return propertys;
+        }
+
+        public List<string> LoadBusinesses()
+        {
+            List<string> businesses = new List<string>();
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "NastyMod.Resources.businesses.json";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    // MelonLogger.Error("Failed to load businesses.json! Check if it's embedded correctly.");
+                    return businesses;
+                }
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string json = reader.ReadToEnd();
+                    // MelonLogger.Msg("Loaded JSON successfully.");
+                    // MelonLogger.Msg($"JSON Content: {json}");
+
+                    string[] parts = json.Split('"');
+                    foreach (string item in parts)
+                    {
+                        string trimmedItem = item.Replace(",", "").Replace("\n", "").Replace("\n", "").Replace("\t", "").Replace("\t", "").Trim();
+                        // MelonLogger.Msg($"Trimmed Item: {trimmedItem}");
+
+                        if (trimmedItem == "{" || trimmedItem == "[" || trimmedItem == "\"")
+                            continue;
+
+                        if (trimmedItem == "]" || trimmedItem == "}")
+                            break;
+
+                        if (!string.IsNullOrWhiteSpace(trimmedItem) && !trimmedItem.Contains("["))
+                        {
+                            businesses.Add(trimmedItem);
+                        }
+                    }
+                }
+            }
+            return businesses;
+        }
+
+        public List<string> LoadCustom()
+        {
+            List<string> custom = new List<string>();
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "NastyMod.Resources.custom.json";
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    // MelonLogger.Error("Failed to load custom.json! Check if it's embedded correctly.");
+                    return custom;
+                }
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string json = reader.ReadToEnd();
+                    // MelonLogger.Msg("Loaded JSON successfully.");
+                    // MelonLogger.Msg($"JSON Content: {json}");
+
+                    string[] parts = json.Split('"');
+                    foreach (string item in parts)
+                    {
+                        string trimmedItem = item.Replace(",", "").Replace("\n", "").Replace("\n", "").Replace("\t", "").Replace("\t", "").Trim();
+                        // MelonLogger.Msg($"Trimmed Item: {trimmedItem}");
+
+                        if (trimmedItem == "{" || trimmedItem == "[" || trimmedItem == "\"")
+                            continue;
+
+                        if (trimmedItem == "]" || trimmedItem == "}")
+                            break;
+
+                        if (!string.IsNullOrWhiteSpace(trimmedItem) && !trimmedItem.Contains("["))
+                        {
+                            custom.Add(trimmedItem);
+                        }
+                    }
+                }
+            }
+            return custom;
         }
     }
 }
