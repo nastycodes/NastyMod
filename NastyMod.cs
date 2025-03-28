@@ -19,11 +19,7 @@ using Il2CppScheduleOne;
 using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.PlayerScripts;
 using Il2CppScheduleOne.Employees;
-
-using JetBrains.Annotations;
 using Il2CppScheduleOne.NPCs;
-using Il2CppScheduleOne.Economy;
-using Il2CppScheduleOne.Property;
 
 public class NastyModClass : MelonMod
 {
