@@ -20,6 +20,7 @@ using Il2CppScheduleOne.ItemFramework;
 using Il2CppScheduleOne.PlayerScripts;
 using Il2CppScheduleOne.Employees;
 using Il2CppScheduleOne.NPCs;
+using Il2CppScheduleOne.UI;
 
 public class NastyModClass : MelonMod
 {
@@ -173,8 +174,38 @@ public class NastyModClass : MelonMod
 
         // SetStackSize();
 
+        
+
         if (Input.GetKeyDown(KeyCode.F11))
+        {
+            bool isCurrentlyPaused = PauseMenu.instance.IsPaused;
+
             _isOpen = !_isOpen;
+
+            // Condition 1: We want the menu open/game paused ('_isOpen' is true)
+            // AND the game is not already paused ('!isCurrentlyPaused' is true).
+            if (_isOpen && !isCurrentlyPaused)
+            {
+                // If both conditions are met, pause the game.
+                PauseMenu.instance.Pause();
+            }
+            // Condition 2: We want the menu closed/game resumed ('_isOpen' is false, so '!_isOpen' is true)
+            // AND the game is currently paused ('isCurrentlyPaused' is true).
+            else if (!_isOpen && isCurrentlyPaused)
+            {
+                // If both these conditions are met, resume the game.
+                PauseMenu.instance.Resume();
+            }
+            // Implicit Else: If neither of the above conditions is met, do nothing.
+            // This covers cases like:
+            // - Trying to open the menu when the game is already paused.
+            // - Trying to close the menu when the game is already running.
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && _isOpen)
+        {
+            _isOpen = false;
+        }
     }
 
     public void GUIFunctions()
