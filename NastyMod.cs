@@ -35,6 +35,9 @@ public class NastyModClass : MelonMod
     private int menuHeight = 500;
     private int menuSpacing = 15;
 
+    private float xPos;
+    private float yPos;
+
     private int tabWidth = 0;
     private int tabHeight = 0;
 
@@ -236,7 +239,10 @@ public class NastyModClass : MelonMod
         };
         // *********
 
-        GUILayout.BeginArea(new Rect(50, 50, menuWidth, menuHeight), GUI.skin.box);
+        xPos = (Screen.width - menuWidth) / 2;
+        yPos = (Screen.height - menuHeight) / 2;
+
+        GUILayout.BeginArea(new Rect(xPos, yPos, menuWidth, menuHeight), GUI.skin.box);
 
         // **Title**
         GUILayout.BeginArea(new Rect(15, 15, menuWidth - (menuSpacing * 2), 40));
