@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using MelonLoader;
 
 // MelonLoader
-[assembly: MelonInfo(typeof(NastyModClass), "NastyMod", "1.0.7", "nasty.codes")]
+[assembly: MelonInfo(typeof(NastyModClass), "NastyMod", "1.0.8", "nasty.codes")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden

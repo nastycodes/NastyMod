@@ -1490,24 +1490,6 @@ public class NastyModClass : MelonMod
     }
 
     [HarmonyPatch]
-    public class CreateDeliveryDisplayPatch
-    {
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(DeliveryApp), "CreateDeliveryStatusDisplay")]
-        public static void Postfix(DeliveryInstance instance)
-        {
-            if (NastyModClass.Instance != null)
-            {
-                MelonLogger.Msg($"A Delivery Status Display was created.");
-                if (instance.Items != null) {
-                    foreach (var item in instance.Items)
-                    {
-                        MelonLogger.Msg($"- item: {item.String} x{item.Int}");
-                    }
-                }
-            }
-        }
-    }
 
     [HarmonyPatch(typeof(Pot), "GetAdditiveGrowthMultiplier")]
     public class PlantGetAdditiveGrowthMultiplierPatch
@@ -1518,34 +1500,6 @@ public class NastyModClass : MelonMod
             if (NastyModClass.Instance != null)
             {
                 __result *= NastyModClass.Instance._world_grow_speed_multiplier;
-            }
-        }
-    }
-
-    [HarmonyPatch]
-    public class SetItemSlotQuantityPatch
-    {
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(StorageEntity), "SetItemSlotQuantity")]
-        public static void SetItemSlotQuantity(int itemSlotIndex, int quantity)
-        {
-            if (NastyModClass.Instance != null)
-            {
-                MelonLogger.Msg($"StorageEntity.SetItemSlotQuantity (index: {itemSlotIndex}, quantity: {quantity})");
-            }
-        }
-    }
-
-    [HarmonyPatch]
-    public class RPCSetItemSlotQuantityPatch
-    {
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(StorageEntity), "RpcLogic___SetItemSlotQuantity_1692629761")]
-        public static void RpcSetItemSlotQuantity(int itemSlotIndex, int quantity)
-        {
-            if (NastyModClass.Instance != null)
-            {
-                MelonLogger.Msg($"And then the RPC Item Slot Quantity is set (index: {itemSlotIndex}, quantity: {quantity}.");
             }
         }
     }
