@@ -1,0 +1,11 @@
+# Ignore bin directories
+bin
+
+# Ignore obj directories
+obj
+
+# Ignore .vs directory
+.vs
+
+# Ignore Temp.txt
+Temp.txt

@@ -1,0 +1,207 @@
+{
+	"categories": [
+		{
+			"category": "Product",
+			"items": {
+				"granddaddypurple": "Granddaddy Purple",
+				"greencrack": "Green Crack",
+				"ogkush": "OG Kush",
+				"sourdiesel": "Sour Diesel",
+				"cocaine": "Cocaine",
+				"meth": "Meth"
+			}
+		},
+		{
+			"category": "Pseudo",
+			"items": {
+				"lowqualitypseudo": "Low-Quality Pseudo",
+				"pseudo": "Pseudo",
+				"highqualitypseudo": "High-Quality Pseudo"
+			}
+		},
+		{
+			"category": "Packaging",
+			"items": {
+				"baggie": "Baggie",
+				"brick": "Brick",
+				"jar": "Jar"
+			}
+		},
+		{
+			"category": "Growing",
+			"items": {
+				"soil": "Soil",
+				"longlifesoil": "Long Life Soil",
+				"extralonglifesoil": "Extra Long Life Soil",
+				"pgr": "PGR",
+				"speedgrow": "Speed Grow",
+				"fertilizer": "Fertilizer",
+				"cocaleaf": "Coca Leaf",
+				"granddaddypurpleseed": "Granddaddy Purple Seed",
+				"greencrackseed": "Green Crack Seed",
+				"ogkushseed":  "OG Kush Seed",
+				"sourdieselseed":  "Sour Diesel Seed",
+				"cocaseed": "Coca Seed"
+			}
+		},
+		{
+			"category": "Tools",
+			"items": {
+				"trimmers": "Trimmers",
+				"electrictrimmers": "Electric Trimmers",
+				"flashlight": "Flashlight",
+				"managementclipboard": "Management Clipboard",
+				"trashbag": "Trashbag",
+				"trashgrabber": "Trash Grabber",
+				"wateringcan": "Watering Can",
+				"bigsprinkler": "Big Sprinkler",
+				"soilpourer": "Soil Pourer",
+				"potsprinkler": "Pot Sprinkler",
+				"baseballbat": "Baseball Bat",
+				"fryingpan": "Frying Pan",
+				"m1911": "M1911",
+				"m1911mag": "M1911 Magazine",
+				"machete": "Machete",
+				"revolvercylinder": "Revolver Cylinder",
+				"revolver": "Revolver"
+			}
+		},
+		{
+			"category": "Furniture",
+			"items": {
+				"coffeetable": "Coffee Table",
+				"dumpster": "Dumpster",
+				"suspensionrack": "Suspension Rack",
+				"metalsquaretable": "Metal Square Table",
+				"trashcan": "Trash Can",
+				"bed": "Bed",
+				"smalltrashcan": "Small Trash Can",
+				"TV": "TV",
+				"woodsquaretable": "Wooden Square Table",
+				"floorlamp": "Floor Lamp",
+				"displaycabinet": "Display Cabinet",
+				"filingcabinet": "Filing Cabinet"
+			}
+		},
+		{
+			"category": "Lightning",
+			"items": {
+				"fullspectrumgrowlight": "Full Spectrum Growlight",
+				"halogengrowlight": "Halogen Growlight",
+				"ledgrowlight": "LED Growlight"
+			}
+		},
+		{
+			"category": "Equipment",
+			"items": {
+				"airpot": "Air Pot",
+				"plasticpot": "Plastic Pot",
+				"growtent": "Growtent",
+				"moisturepreservingpot": "Moisture Preserving Pot",
+				"largestoragerack": "Large Storage Rack",
+				"mediumstoragerack": "Medium Storage Rack",
+				"smallstoragerack": "Small Storage Rack",
+				"brickpress": "Brick Press",
+				"cauldron": "Cauldron",
+				"chemistrystation": "Chemistry Station",
+				"dryingrack": "Drying Rack",
+				"laboven": "Lab Oven",
+				"launderingstation": "Laundering Station",
+				"mixingstation": "Mixing Station",
+				"mixingstationmk2": "Mixing Station MK2",
+				"packagingstation": "Packaging Station",
+				"packagingstationmk2": "Packaging Station MK2"
+			}
+		},
+		{
+			"category": "Ingredients",
+			"items": {
+				"banana": "Banana",
+				"cuke": "Cuke",
+				"donut": "Donut",
+				"energydrink": "Energy Drink",
+				"flumedicine": "Flu Medicine",
+				"chili": "Chili",
+				"acid": "Acid",
+				"addy": "Addy",
+				"battery": "Battery",
+				"gasoline": "Gasoline",
+				"horsesemen": "Horse Semen",
+				"motoroil": "Motor Oil",
+				"mouthwash": "Mouthwash",
+				"paracetamol": "Paracetamol",
+				"viagra": "Viagra",
+				"cocainebase": "Cocaine Base",
+				"iodine": "Iodine",
+				"megabean": "Megabean",
+				"phosphorus": "Phosphorus",
+				"liquidbabyblue": "Liquid Baby Blue",
+				"liquidbikercrank": "Liquid Biker Crank",
+				"liquidglass": "Liquid Glass",
+				"liquidmeth": "Liquid Meth",
+				"babyblue": "Baby Blue",
+				"bikercrank": "Bikercrank",
+				"glass": "Glass"
+			}
+		},
+		{
+			"category": "Clothing",
+			"items": {
+				"cargopants": "Cargo Pants",
+				"jeans": "Jeans",
+				"jorts": "Jorts",
+				"longskirt": "Longskirt",
+				"overalls": "Overalls",
+				"skirt": "Skirt",
+				"legendsunglasses": "Legend Sunglasses",
+				"rectangleframeglasses": "Rectangle Frameglasses",
+				"smallroundglasses": "Small Roundglasses",
+				"speeddealershades": "Speed Dealer Shades",
+				"combatboots": "Combat Boots",
+				"dressshoes": "Dress Shoes",
+				"flats": "Flats",
+				"sandals": "Sandals",
+				"sneakers": "Sneakers",
+				"fingerlessgloves": "Fingerless Gloves",
+				"gloves": "Gloves",
+				"buckethat": "Bucket Hat",
+				"cap": "Cap",
+				"chefhat": "Chef Hat",
+				"cowboyhat": "Cowboy Hat",
+				"flatcap": "Flat Cap",
+				"porkpiehat": "Pork Pie Hat",
+				"saucepan": "Saucepan",
+				"apron": "Apron",
+				"blazer": "Blazer",
+				"collarjacket": "Collar Jacket",
+				"tacticalvest": "Tactical Vest",
+				"vest": "Vest",
+				"buttonup": "Button Up",
+				"rolledbuttonup": "Rolled Button Up",
+				"flannelshirt": "Flannel Shirt",
+				"tshirt": "T-Shirt",
+				"vneck": "V-Neck",
+				"belt": "Belt"
+			}
+		},
+		{
+			"category": "Vehicle",
+			"items": {
+				"cheapskateboard": "Cheap Skateboard",
+				"cruiser": "Cruiser",
+				"goldenskateboard": "Golden Skateboard",
+				"lightweightskateboard": "Lightweight Skateboard",
+				"skateboard": "Skateboard"
+			}
+		},
+		{
+			"category": "Special",
+			"items": {
+				"chateaulapeepee": "Chataeu La PeePee",
+				"goldbar": "Gold Bar",
+				"oldmanjimmys": "Old Man Jimmys",
+				"testweed": "Testweed"
+			}
+		}
+	]
+}

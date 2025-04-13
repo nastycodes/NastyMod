@@ -1,0 +1,41 @@
+{
+    "categories": [
+        {
+            "category": "Properties",
+            "items": {
+                "barn": "Barn",
+                "manor": "Manor",
+                "rv": "RV",
+                "bungalow": "Bungalow",
+                "dockswarehouse": "Docks Warehouse",
+                "sweatshop": "Sweatshop",
+                "motelroom":  "Motel Room"
+            }
+        },
+        {
+            "category": "Businesses",
+            "items": {
+                "laundromat": "Laundromat",
+                "postoffice": "Post Office",
+                "carwash": "Car Wash",
+                "tacoticklers": "Taco Ticklers"
+            }
+        },
+        {
+            "category": "Custom",
+            "items": {
+                "-61,3601 1,065 56,2976": "Pawn Shop",
+                "25,7309 1,065 85,559": "Casino",
+                "81,3396 1,065 -6,8205": "Ray's Real Estate",
+                "70,7089 1,0068 -5,8067": "Bleuball's Boutique",
+                "20,6505 1,065 -8,0891": "Gas Station",
+                "35,2312 1,065 -31,535": "Hyland Auto",
+                "11,2122 1,065 -19,8534": "Auto Shop",
+                "102,6752 1,0632 25,4493": "Handy Hank's Hardware",
+                "-21,4115 -2,935 137,6193": "Dans Hardware",
+                "-130,6071 -2,935 67,4384": "Top Tattoo",
+                "-42,4525 -1,535 42,878": "Dark Market Area"
+            }
+        }
+    ]
+}
