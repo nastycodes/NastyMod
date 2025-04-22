@@ -61,4 +61,4 @@ All features have been tested and are working in the latest game version (v0.3.4
 - Put the NastyMod.dll inside the Mods folder in the games root directory (if it does not exist, start the game once and close it before putting the .dll inside the directory) - the path for example would be C:\Program Files (x86)\Steam\steamapps\common\Schedule I
 - Start the game and toggle the menu with Hotkey F11
 
-If you need any help or find bugs, feel free to [join my discord server](https://discord.gg/eFxB75Bu)!
+If you need any help or find bugs, feel free to [join my discord server](https://discord.gg/r843DTBn)!
